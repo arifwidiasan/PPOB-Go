@@ -7,6 +7,17 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
+// LoginAdmin godoc
+// @Summary Login Admin.
+// @Description login admin to get jwt token.
+// @Tags Admin
+// @Accept json
+// @Produce json
+// @Param	admin	body	model.AdminLogin	true	"JSON username and user_pass"
+// @Success	200	{object} docs.LoginAdminSuccess
+// @Failure 401 {string} string "unauthorized"
+// @Failure 500 {string} string "internal server error"
+// @Router /admin/login [POST]
 func (ce *EchoController) LoginAdminController(c echo.Context) error {
 	adminLogin := model.AdminLogin{}
 
