@@ -1,0 +1,67 @@
+basePath: /v1
+definitions:
+  docs.LoginAdminSuccess:
+    properties:
+      messages:
+        example: success
+        type: string
+      token:
+        example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NTQyNzA2OTAsImlkIjoxLCJ1c2VybmFtZSI6ImFkbWluIn0.9Qif8_Ug6Uy_oxDXIuIui3nepCPFc1jJ6mO6wEhiuHE
+        type: string
+    type: object
+  model.AdminLogin:
+    properties:
+      password:
+        example: admin123
+        type: string
+      username:
+        example: admin
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: Documentation of To-do List App API.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: UPay API
+  version: "2.0"
+paths:
+  /admin/login:
+    post:
+      consumes:
+      - application/json
+      description: login admin to get jwt token.
+      parameters:
+      - description: JSON username and user_pass
+        in: body
+        name: admin
+        required: true
+        schema:
+          $ref: '#/definitions/model.AdminLogin'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/docs.LoginAdminSuccess'
+        "401":
+          description: unauthorized
+          schema:
+            type: string
+        "500":
+          description: internal server error
+          schema:
+            type: string
+      summary: Login Admin.
+      tags:
+      - Admin
+schemes:
+- http
+swagger: "2.0"
