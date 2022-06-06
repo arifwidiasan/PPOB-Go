@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/CapstoneProject31/backend_ppob_31/helper"
+	"github.com/CapstoneProject31/backend_ppob_31/model"
 )
 
 func (s *svc) LoginAdmin(username, password string) (string, int) {
@@ -22,4 +23,8 @@ func (s *svc) LoginAdmin(username, password string) (string, int) {
 	}
 
 	return token, http.StatusOK
+}
+
+func (s *svc) GetAdminByUsernameService(username string) (model.Admin, error) {
+	return s.repo.GetAdminByUsername(username)
 }

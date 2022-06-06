@@ -2,6 +2,7 @@ package domain
 
 import (
 	"github.com/CapstoneProject31/backend_ppob_31/model"
+	"github.com/golang-jwt/jwt"
 )
 
 type AdapterRepository interface {
@@ -16,6 +17,9 @@ type AdapterRepository interface {
 
 type AdapterService interface {
 	LoginAdmin(username, password string) (string, int)
+	GetAdminByUsernameService(username string) (model.Admin, error)
+
+	ClaimToken(bearer *jwt.Token) string
 
 	CreateProductTypeService(product_type model.Product_type) error
 	GetAllProductTypeService() []model.Product_type

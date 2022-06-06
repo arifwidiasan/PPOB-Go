@@ -4,6 +4,7 @@ import (
 	"strconv"
 
 	"github.com/CapstoneProject31/backend_ppob_31/model"
+	"github.com/golang-jwt/jwt"
 	"github.com/labstack/echo/v4"
 )
 
@@ -18,6 +19,15 @@ import (
 // @Failure 500 {object} docs.CreateProductTypeFail
 // @Router /product_types [POST]
 func (ce *EchoController) CreateProductTypeController(c echo.Context) error {
+	username := ce.Svc.ClaimToken(c.Get("user").(*jwt.Token))
+
+	_, err := ce.Svc.GetAdminByUsernameService(username)
+	if err != nil {
+		return c.JSON(403, map[string]interface{}{
+			"messages": "forbidden",
+		})
+	}
+
 	product_type := model.Product_type{}
 	if err := c.Bind(&product_type); err != nil {
 		return c.JSON(400, map[string]interface{}{
@@ -25,7 +35,7 @@ func (ce *EchoController) CreateProductTypeController(c echo.Context) error {
 		})
 	}
 
-	err := ce.Svc.CreateProductTypeService(product_type)
+	err = ce.Svc.CreateProductTypeService(product_type)
 	if err != nil {
 		return c.JSON(500, map[string]interface{}{
 			"messages": err.Error(),
@@ -65,6 +75,15 @@ func (ce *EchoController) GetOneProductTypeController(c echo.Context) error {
 }
 
 func (ce *EchoController) UpdateActivityController(c echo.Context) error {
+	username := ce.Svc.ClaimToken(c.Get("user").(*jwt.Token))
+
+	_, err := ce.Svc.GetAdminByUsernameService(username)
+	if err != nil {
+		return c.JSON(403, map[string]interface{}{
+			"messages": "forbidden",
+		})
+	}
+
 	id := c.Param("id")
 	id_int, _ := strconv.Atoi(id)
 
@@ -75,7 +94,7 @@ func (ce *EchoController) UpdateActivityController(c echo.Context) error {
 		})
 	}
 
-	err := ce.Svc.UpdateProductTypeByIDService(id_int, product_type)
+	err = ce.Svc.UpdateProductTypeByIDService(id_int, product_type)
 	if err != nil {
 		return c.JSON(404, map[string]interface{}{
 			"messages": "no id found or no change",
@@ -88,9 +107,18 @@ func (ce *EchoController) UpdateActivityController(c echo.Context) error {
 }
 
 func (ce *EchoController) DeleteProductTypeController(c echo.Context) error {
+	username := ce.Svc.ClaimToken(c.Get("user").(*jwt.Token))
+
+	_, err := ce.Svc.GetAdminByUsernameService(username)
+	if err != nil {
+		return c.JSON(403, map[string]interface{}{
+			"messages": "forbidden",
+		})
+	}
+
 	id := c.Param("id")
 	id_int, _ := strconv.Atoi(id)
-	err := ce.Svc.DeleteProductTypeByIDService(id_int)
+	err = ce.Svc.DeleteProductTypeByIDService(id_int)
 	if err != nil {
 		return c.JSON(404, map[string]interface{}{
 			"messages": "product type not found",
