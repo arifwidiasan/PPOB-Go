@@ -34,5 +34,10 @@ func RegisterGroupAPI(e *echo.Echo, conf config.Config) {
 	m.LogMiddleware(e)
 	api.POST("/admin/login", cont.LoginAdminController)
 
+	api.GET("/product_types", cont.GetAllProductTypeController)
 	api.POST("/product_types", cont.CreateProductTypeController)
+
+	api.GET("/product_types/:id", cont.GetOneProductTypeController)
+	api.PUT("/product_types/:id", cont.UpdateActivityController)
+	api.DELETE("/product_types/:id", cont.DeleteProductTypeController)
 }

@@ -1,5 +1,26 @@
 basePath: /v1
 definitions:
+  docs.CreateProductType:
+    properties:
+      name:
+        example: Pulsa
+        type: string
+    type: object
+  docs.CreateProductTypeFail:
+    properties:
+      messages:
+        example: error insert product type
+        type: string
+    type: object
+  docs.CreateProductTypeSuccess:
+    properties:
+      messages:
+        example: success
+        type: string
+      product_type_name:
+        example: Pulsa
+        type: string
+    type: object
   docs.LoginAdminSuccess:
     properties:
       messages:
@@ -9,13 +30,13 @@ definitions:
         example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NTQyNzA2OTAsImlkIjoxLCJ1c2VybmFtZSI6ImFkbWluIn0.9Qif8_Ug6Uy_oxDXIuIui3nepCPFc1jJ6mO6wEhiuHE
         type: string
     type: object
-  model.AdminLogin:
+  docs.NewAdminLogin:
     properties:
       password:
-        example: admin123
+        example: admin
         type: string
       username:
-        example: admin
+        example: admin123
         type: string
     type: object
 host: localhost:8080
@@ -24,7 +45,7 @@ info:
     email: support@swagger.io
     name: API Support
     url: http://www.swagger.io/support
-  description: Documentation of To-do List App API.
+  description: Documentation of UPay API.
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
@@ -43,7 +64,7 @@ paths:
         name: admin
         required: true
         schema:
-          $ref: '#/definitions/model.AdminLogin'
+          $ref: '#/definitions/docs.NewAdminLogin'
       produces:
       - application/json
       responses:
@@ -62,6 +83,32 @@ paths:
       summary: Login Admin.
       tags:
       - Admin
+  /product_types:
+    post:
+      consumes:
+      - application/json
+      description: create new product type with name.
+      parameters:
+      - description: JSON name
+        in: body
+        name: product_type
+        required: true
+        schema:
+          $ref: '#/definitions/docs.CreateProductType'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/docs.CreateProductTypeSuccess'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/docs.CreateProductTypeFail'
+      summary: Create New Product Type.
+      tags:
+      - Product Type
 schemes:
 - http
 swagger: "2.0"

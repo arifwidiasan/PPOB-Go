@@ -7,7 +7,10 @@ import (
 )
 
 func (s *svc) LoginAdmin(username, password string) (string, int) {
-	admin, _ := s.repo.GetAdminByUsername(username)
+	admin, err := s.repo.GetAdminByUsername(username)
+	if err != nil {
+		return "", http.StatusUnauthorized
+	}
 
 	if admin.Password != password {
 		return "", http.StatusUnauthorized

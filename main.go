@@ -11,7 +11,7 @@ import (
 
 // @title UPay API
 // @version 2.0
-// @description Documentation of To-do List App API.
+// @description Documentation of UPay API.
 // @termsOfService http://swagger.io/terms/
 
 // @contact.name API Support
