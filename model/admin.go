@@ -10,6 +10,6 @@ type Admin struct {
 }
 
 type AdminLogin struct {
-	Username string `json:"username" example:"admin"`
-	Password string `json:"password" example:"admin123"`
+	Username string `json:"username"`
+	Password string `json:"password"`
 }
