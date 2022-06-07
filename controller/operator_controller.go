@@ -8,17 +8,7 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-// CreateProductType godoc
-// @Summary Create New Product Type.
-// @Description create new product type with name.
-// @Tags Product Type
-// @Accept json
-// @Produce json
-// @Param	product_type	body	docs.CreateProductType	true	"JSON name"
-// @Success	201 {object} docs.CreateProductTypeSuccess
-// @Failure 500 {object} docs.CreateProductTypeFail
-// @Router /product_types [POST]
-func (ce *EchoController) CreateProductTypeController(c echo.Context) error {
+func (ce *EchoController) CreateOperatorController(c echo.Context) error {
 	username := ce.Svc.ClaimToken(c.Get("user").(*jwt.Token))
 
 	_, err := ce.Svc.GetAdminByUsernameService(username)
@@ -28,14 +18,14 @@ func (ce *EchoController) CreateProductTypeController(c echo.Context) error {
 		})
 	}
 
-	product_type := model.Product_type{}
-	if err := c.Bind(&product_type); err != nil {
+	operator := model.Operator{}
+	if err := c.Bind(&operator); err != nil {
 		return c.JSON(400, map[string]interface{}{
 			"messages": err.Error(),
 		})
 	}
 
-	err = ce.Svc.CreateProductTypeService(product_type)
+	err = ce.Svc.CreateOperatorService(operator)
 	if err != nil {
 		return c.JSON(500, map[string]interface{}{
 			"messages": err.Error(),
@@ -43,38 +33,38 @@ func (ce *EchoController) CreateProductTypeController(c echo.Context) error {
 	}
 
 	return c.JSON(201, map[string]interface{}{
-		"messages":          "success",
-		"product_type_name": product_type.Name,
+		"messages":      "success",
+		"operator_name": operator.Name,
 	})
 }
 
-func (ce *EchoController) GetAllProductTypeController(c echo.Context) error {
+func (ce *EchoController) GetAllOperatorController(c echo.Context) error {
 
-	product_types := ce.Svc.GetAllProductTypeService()
+	operator := ce.Svc.GetAllOperatorService()
 
 	return c.JSON(200, map[string]interface{}{
-		"messages":      "success",
-		"product_types": product_types,
+		"messages":  "success",
+		"operators": operator,
 	})
 }
 
-func (ce *EchoController) GetOneProductTypeController(c echo.Context) error {
+func (ce *EchoController) GetOneOperatorController(c echo.Context) error {
 	id := c.Param("id")
 	id_int, _ := strconv.Atoi(id)
-	res, err := ce.Svc.GetProductTypeByIDService(id_int)
+	res, err := ce.Svc.GetOperatorByIDService(id_int)
 	if err != nil {
 		return c.JSON(404, map[string]interface{}{
-			"messages": "product type not found",
+			"messages": "operator not found",
 		})
 	}
 
 	return c.JSON(200, map[string]interface{}{
-		"messages":     "success",
-		"product_type": res,
+		"messages": "success",
+		"operator": res,
 	})
 }
 
-func (ce *EchoController) UpdateProductTypeController(c echo.Context) error {
+func (ce *EchoController) UpdateOperatorController(c echo.Context) error {
 	username := ce.Svc.ClaimToken(c.Get("user").(*jwt.Token))
 
 	_, err := ce.Svc.GetAdminByUsernameService(username)
@@ -87,14 +77,14 @@ func (ce *EchoController) UpdateProductTypeController(c echo.Context) error {
 	id := c.Param("id")
 	id_int, _ := strconv.Atoi(id)
 
-	product_type := model.Product_type{}
-	if err := c.Bind(&product_type); err != nil {
+	operator := model.Operator{}
+	if err := c.Bind(&operator); err != nil {
 		return c.JSON(400, map[string]interface{}{
 			"messages": err.Error(),
 		})
 	}
 
-	err = ce.Svc.UpdateProductTypeByIDService(id_int, product_type)
+	err = ce.Svc.UpdateOperatorByIDService(id_int, operator)
 	if err != nil {
 		return c.JSON(404, map[string]interface{}{
 			"messages": "no id found or no change",
@@ -106,7 +96,7 @@ func (ce *EchoController) UpdateProductTypeController(c echo.Context) error {
 	})
 }
 
-func (ce *EchoController) DeleteProductTypeController(c echo.Context) error {
+func (ce *EchoController) DeleteOperatorController(c echo.Context) error {
 	username := ce.Svc.ClaimToken(c.Get("user").(*jwt.Token))
 
 	_, err := ce.Svc.GetAdminByUsernameService(username)
@@ -118,10 +108,10 @@ func (ce *EchoController) DeleteProductTypeController(c echo.Context) error {
 
 	id := c.Param("id")
 	id_int, _ := strconv.Atoi(id)
-	err = ce.Svc.DeleteProductTypeByIDService(id_int)
+	err = ce.Svc.DeleteOperatorByIDService(id_int)
 	if err != nil {
 		return c.JSON(404, map[string]interface{}{
-			"messages": "product type not found",
+			"messages": "operator not found",
 		})
 	}
 
