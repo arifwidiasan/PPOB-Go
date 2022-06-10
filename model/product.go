@@ -7,8 +7,8 @@ type Product struct {
 	CodeProduct   string    `gorm:"unique;not null" json:"code_product"`
 	Name          string    `gorm:"unique;not null" json:"name"`
 	Status        *bool     `gorm:"default:true" json:"status"`
-	Price         int       `gorm:"default:1;not null" json:"price"`
-	Qty           int       `gorm:"default:1;not null" json:"qty"`
+	Price         uint      `gorm:"default:1;not null" json:"price"`
+	Qty           uint      `gorm:"default:1;not null" json:"qty"`
 	CreatedAt     time.Time `json:"created_at"`
 	ProductTypeID uint      `json:"product_type_id"`
 	OperatorID    uint      `json:"operator_id"`
@@ -19,8 +19,8 @@ type ProductResponse struct {
 	CodeProduct     string    `json:"code_product"`
 	Name            string    `json:"name"`
 	Status          bool      `json:"status"`
-	Price           int       `json:"price"`
-	Qty             int       `json:"qty"`
+	Price           uint      `json:"price"`
+	Qty             uint      `json:"qty"`
 	CreatedAt       time.Time `json:"created_at"`
 	ProductTypeID   uint      `json:"product_type_id"`
 	OperatorID      uint      `json:"operator_id"`
