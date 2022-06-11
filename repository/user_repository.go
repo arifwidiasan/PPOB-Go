@@ -1,0 +1,25 @@
+package repository
+
+import (
+	"fmt"
+
+	"github.com/CapstoneProject31/backend_ppob_31/model"
+)
+
+func (r *repositoryMysqlLayer) CreateUser(user model.User) error {
+	res := r.DB.Create(&user)
+	if res.RowsAffected < 1 {
+		return fmt.Errorf("error insert user")
+	}
+
+	return nil
+}
+
+func (r *repositoryMysqlLayer) CheckLoginUser(input string) (user model.User, err error) {
+	res := r.DB.Where("username = ? OR email = ?", input, input).Find(&user)
+	if res.RowsAffected < 1 {
+		err = fmt.Errorf("user not found")
+	}
+
+	return
+}

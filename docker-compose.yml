@@ -6,12 +6,12 @@ services:
       ports:
         - "3306:3306"
       environment:
-        MYSQL_ROOT_PASSWORD : root
+        MYSQL_ROOT_PASSWORD : budipekerti
         MYSQL_DATABASE: upay_app
       volumes:
         - my-upayvolume:/var/lib/mysql
       healthcheck:   # wajib implementasi health check jika condition service_healthy
-        test: ["CMD", "mysql", "-u", "root",  "-proot", "-e", "show schemas"]
+        test: ["CMD", "mysql", "-u", "root",  "-pbudipekerti", "-e", "show schemas"]
         interval: 10s 
       
   be_app:
