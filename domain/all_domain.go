@@ -28,6 +28,7 @@ type AdapterRepository interface {
 	DeleteProductByID(id int) error
 
 	CreateUser(user model.User) error
+	CheckLoginUser(input string) (user model.User, err error)
 }
 
 type AdapterService interface {
@@ -55,4 +56,5 @@ type AdapterService interface {
 	DeleteProductByIDService(id int) error
 
 	CreateUserService(user model.User) error
+	LoginUser(input, password string) (string, int)
 }

@@ -12,3 +12,8 @@ type User struct {
 	Balance   uint      `gorm:"default:0" json:"balance"`
 	CreatedAt time.Time `json:"created_at"`
 }
+
+type UserLogin struct {
+	Input    string `json:"input"`
+	Password string `json:"password"`
+}

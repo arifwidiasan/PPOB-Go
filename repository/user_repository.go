@@ -14,3 +14,12 @@ func (r *repositoryMysqlLayer) CreateUser(user model.User) error {
 
 	return nil
 }
+
+func (r *repositoryMysqlLayer) CheckLoginUser(input string) (user model.User, err error) {
+	res := r.DB.Where("username = ? OR email = ?", input, input).Find(&user)
+	if res.RowsAffected < 1 {
+		err = fmt.Errorf("user not found")
+	}
+
+	return
+}
