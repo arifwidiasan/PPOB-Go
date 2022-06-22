@@ -56,7 +56,12 @@ func RegisterGroupAPI(e *echo.Echo, conf config.Config) {
 	api.PUT("/products/:id", cont.UpdateProductController, middleware.JWT([]byte(conf.JWT_KEY)))
 	api.DELETE("/products/:id", cont.DeleteProductController, middleware.JWT([]byte(conf.JWT_KEY)))
 
+	api.GET("/users", cont.GetAllUserController, middleware.JWT([]byte(conf.JWT_KEY)))
 	api.POST("/users", cont.CreateUserController)
+
+	api.GET("/users/:id", cont.GetOneUserController)
+	api.PUT("/users/:id", cont.UpdateUserController, middleware.JWT([]byte(conf.JWT_KEY)))
+	api.DELETE("/users/:id", cont.DeleteUserController, middleware.JWT([]byte(conf.JWT_KEY)))
 
 	api.POST("/users/login", cont.LoginUserController)
 }

@@ -28,6 +28,10 @@ type AdapterRepository interface {
 	DeleteProductByID(id int) error
 
 	CreateUser(user model.User) error
+	GetAllUser() []model.User
+	GetUserByID(id int) (user model.User, err error)
+	UpdateUserByID(id int, user model.User) error
+	DeleteUserByID(id int) error
 	CheckLoginUser(input string) (user model.User, err error)
 }
 
@@ -56,5 +60,9 @@ type AdapterService interface {
 	DeleteProductByIDService(id int) error
 
 	CreateUserService(user model.User) error
+	GetAllUserService() []model.User
+	GetUserByIDService(id int) (model.User, error)
+	UpdateUserByIDService(id int, user model.User) error
+	DeleteUserByIDService(id int) error
 	LoginUser(input, password string) (string, int)
 }

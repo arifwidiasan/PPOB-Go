@@ -23,3 +23,37 @@ func (r *repositoryMysqlLayer) CheckLoginUser(input string) (user model.User, er
 
 	return
 }
+
+func (r *repositoryMysqlLayer) GetAllUser() []model.User {
+	users := []model.User{}
+	r.DB.Find(&users)
+
+	return users
+}
+
+func (r *repositoryMysqlLayer) GetUserByID(id int) (user model.User, err error) {
+	res := r.DB.Where("id = ?", id).Find(&user)
+	if res.RowsAffected < 1 {
+		err = fmt.Errorf("user not found")
+	}
+
+	return
+}
+
+func (r *repositoryMysqlLayer) UpdateUserByID(id int, user model.User) error {
+	res := r.DB.Where("id = ?", id).UpdateColumns(&user)
+	if res.RowsAffected < 1 {
+		return fmt.Errorf("error update user")
+	}
+
+	return nil
+}
+
+func (r *repositoryMysqlLayer) DeleteUserByID(id int) error {
+	res := r.DB.Unscoped().Delete(&model.User{}, id)
+	if res.RowsAffected < 1 {
+		return fmt.Errorf("error delete user")
+	}
+
+	return nil
+}
