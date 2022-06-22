@@ -43,3 +43,28 @@ func (s *svc) LoginUser(input, password string) (string, int) {
 
 	return token, http.StatusOK
 }
+
+func (s *svc) GetAllUserService() []model.User {
+	return s.repo.GetAllUser()
+}
+
+func (s *svc) GetUserByIDService(id int) (model.User, error) {
+	return s.repo.GetUserByID(id)
+}
+
+func (s *svc) UpdateUserByIDService(id int, user model.User) error {
+	if user.Password != "" {
+		pass := []byte(user.Password)
+		hash, err := bcrypt.GenerateFromPassword(pass, bcrypt.DefaultCost)
+		if err != nil {
+			panic(err)
+		}
+
+		user.Password = string(hash)
+	}
+	return s.repo.UpdateUserByID(id, user)
+}
+
+func (s *svc) DeleteUserByIDService(id int) error {
+	return s.repo.DeleteUserByID(id)
+}
