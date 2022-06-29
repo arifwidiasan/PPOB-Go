@@ -115,7 +115,7 @@ func (ce *EchoController) DeleteOperatorController(c echo.Context) error {
 		})
 	}
 
-	return c.JSON(200, map[string]interface{}{
+	return c.JSON(204, map[string]interface{}{
 		"messages": "deleted",
 	})
 }
