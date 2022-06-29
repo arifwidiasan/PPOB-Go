@@ -30,7 +30,7 @@ func RegisterGroupAPI(e *echo.Echo, conf config.Config) {
 		})
 	})
 
-	api := e.Group("/v1")
+	api := e.Group("/v1", middleware.CORS())
 
 	m.LogMiddleware(e)
 	api.POST("/admin/login", cont.LoginAdminController)
