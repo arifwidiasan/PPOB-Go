@@ -33,6 +33,8 @@ type AdapterRepository interface {
 	UpdateUserByID(id int, user model.User) error
 	DeleteUserByID(id int) error
 	CheckLoginUser(input string) (user model.User, err error)
+
+	CreatePaymentMethod(payment_method model.Payment_method) error
 }
 
 type AdapterService interface {
@@ -65,4 +67,6 @@ type AdapterService interface {
 	UpdateUserByIDService(id int, user model.User) error
 	DeleteUserByIDService(id int) error
 	LoginUser(input, password string) (string, int)
+
+	CreatePaymentMethodService(payment_method model.Payment_method) error
 }
