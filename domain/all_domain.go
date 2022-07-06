@@ -23,8 +23,8 @@ type AdapterRepository interface {
 	CreateProduct(product model.Product) error
 	GetProductByName(name string) (product model.Product, err error)
 	UpdateProductByID(id int, product model.Product) error
-	GetAllProduct() []model.ProductResponse
-	GetProductByID(id int) (product model.ProductResponse, err error)
+	GetAllProduct() []model.Product
+	GetProductByID(id int) (product model.Product, err error)
 	DeleteProductByID(id int) error
 
 	CreateUser(user model.User) error
@@ -60,8 +60,8 @@ type AdapterService interface {
 	DeleteOperatorByIDService(id int) error
 
 	CreateProductService(product model.Product) error
-	GetAllProductService() []model.ProductResponse
-	GetProductByIDService(id int) (model.ProductResponse, error)
+	GetAllProductService() []model.Product
+	GetProductByIDService(id int) (model.Product, error)
 	UpdateProductByIDService(id int, product model.Product) error
 	DeleteProductByIDService(id int) error
 

@@ -32,26 +32,12 @@ func (s *svc) CreateProductService(product model.Product) error {
 	return nil
 }
 
-func (s *svc) GetAllProductService() []model.ProductResponse {
-	product_type := model.Product_type{}
-	operator := model.Operator{}
-	products := s.repo.GetAllProduct()
-	for i, v := range products {
-		product_type, _ = s.repo.GetProductTypeByID(int(v.ProductTypeID))
-		operator, _ = s.repo.GetOperatorByID(int(v.OperatorID))
-		products[i].ProductTypeName = product_type.Name
-		products[i].OperatorName = operator.Name
-	}
-	return products
+func (s *svc) GetAllProductService() []model.Product {
+	return s.repo.GetAllProduct()
 }
 
-func (s *svc) GetProductByIDService(id int) (model.ProductResponse, error) {
-	product, err := s.repo.GetProductByID(id)
-	product_type, _ := s.repo.GetProductTypeByID(int(product.ProductTypeID))
-	operator, _ := s.repo.GetOperatorByID(int(product.OperatorID))
-	product.ProductTypeName = product_type.Name
-	product.OperatorName = operator.Name
-	return product, err
+func (s *svc) GetProductByIDService(id int) (model.Product, error) {
+	return s.repo.GetProductByID(id)
 }
 
 func (s *svc) UpdateProductByIDService(id int, product model.Product) error {
