@@ -64,4 +64,11 @@ func RegisterGroupAPI(e *echo.Echo, conf config.Config) {
 	api.DELETE("/users/:id", cont.DeleteUserController, middleware.JWT([]byte(conf.JWT_KEY)))
 
 	api.POST("/users/login", cont.LoginUserController)
+
+	api.GET("/payment_methods", cont.GetAllPaymentMethodController)
+	api.POST("/payment_methods", cont.CreatePaymentMethodController, middleware.JWT([]byte(conf.JWT_KEY)))
+
+	api.GET("/payment_methods/:id", cont.GetOnePaymentMethodController)
+	api.PUT("/payment_methods/:id", cont.UpdatePaymentMethodController, middleware.JWT([]byte(conf.JWT_KEY)))
+	api.DELETE("/payment_methods/:id", cont.DeletePaymentMethodController, middleware.JWT([]byte(conf.JWT_KEY)))
 }
