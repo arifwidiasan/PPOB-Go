@@ -35,6 +35,10 @@ type AdapterRepository interface {
 	CheckLoginUser(input string) (user model.User, err error)
 
 	CreatePaymentMethod(payment_method model.Payment_method) error
+	GetAllPaymentMethod() []model.Payment_method
+	GetPaymentMethodByID(id int) (payment_method model.Payment_method, err error)
+	UpdatePaymentMethodByID(id int, payment_method model.Payment_method) error
+	DeletePaymentMethodByID(id int) error
 }
 
 type AdapterService interface {
@@ -69,4 +73,8 @@ type AdapterService interface {
 	LoginUser(input, password string) (string, int)
 
 	CreatePaymentMethodService(payment_method model.Payment_method) error
+	GetAllPaymentMethodService() []model.Payment_method
+	GetPaymentMethodByIDService(id int) (model.Payment_method, error)
+	UpdatePaymentMethodByIDService(id int, payment_method model.Payment_method) error
+	DeletePaymentMethodByIDService(id int) error
 }
