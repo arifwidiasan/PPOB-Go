@@ -68,3 +68,7 @@ func (s *svc) UpdateUserByIDService(id int, user model.User) error {
 func (s *svc) DeleteUserByIDService(id int) error {
 	return s.repo.DeleteUserByID(id)
 }
+
+func (s *svc) GetUserByUsernameService(username string) (model.User, error) {
+	return s.repo.GetUserByUsername(username)
+}
