@@ -43,3 +43,27 @@ func (s *svc) CreateTransactionService(transaction model.Transaction) error {
 
 	return nil
 }
+
+func (s *svc) GetAllTransactionService() []model.Transaction {
+	return s.repo.GetAllTransaction()
+}
+
+func (s *svc) GetTransactionByIDService(id int) (model.Transaction, error) {
+	return s.repo.GetTransactionByID(id)
+}
+
+func (s *svc) UpdateTransactionByIDService(id int, transaction model.Transaction) error {
+	return s.repo.UpdateTransactionByID(id, transaction)
+}
+
+func (s *svc) DeleteTransactionByIDService(id int) error {
+	return s.repo.DeleteTransactionByID(id)
+}
+
+func (s *svc) GetAllUserTransactionService(id int) []model.Transaction {
+	return s.repo.GetAllUserTransaction(id)
+}
+
+func (s *svc) GetTransactionByCodeTransactionService(code_transaction string) (model.Transaction, error) {
+	return s.repo.GetTransactionByCodeTransaction(code_transaction)
+}

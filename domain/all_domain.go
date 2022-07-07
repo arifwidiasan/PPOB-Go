@@ -44,6 +44,10 @@ type AdapterRepository interface {
 	CreateTransaction(transaction model.Transaction) error
 	GetTransactionByCodeTransaction(code_transaction string) (transaction model.Transaction, err error)
 	UpdateTransactionByID(id int, transaction model.Transaction) error
+	GetAllTransaction() []model.Transaction
+	GetTransactionByID(id int) (transaction model.Transaction, err error)
+	DeleteTransactionByID(id int) error
+	GetAllUserTransaction(id int) []model.Transaction
 }
 
 type AdapterService interface {
@@ -85,4 +89,10 @@ type AdapterService interface {
 	DeletePaymentMethodByIDService(id int) error
 
 	CreateTransactionService(transaction model.Transaction) error
+	GetAllTransactionService() []model.Transaction
+	GetTransactionByIDService(id int) (model.Transaction, error)
+	UpdateTransactionByIDService(id int, transaction model.Transaction) error
+	DeleteTransactionByIDService(id int) error
+	GetAllUserTransactionService(id int) []model.Transaction
+	GetTransactionByCodeTransactionService(code_transaction string) (model.Transaction, error)
 }
