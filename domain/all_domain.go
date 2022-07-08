@@ -50,6 +50,10 @@ type AdapterRepository interface {
 	GetTransactionByID(id int) (transaction model.Transaction, err error)
 	DeleteTransactionByID(id int) error
 	GetAllUserTransaction(id int) []model.Transaction
+
+	CreateVirtualAccount(virtual_account model.Virtual_account) error
+	CheckVirtualAccount(user_id, payment_method_id int) (virtual_account model.Virtual_account, err error)
+	UpdateVirtualAccountByID(id int, virtual_account model.Virtual_account) error
 }
 
 type AdapterService interface {
@@ -99,4 +103,6 @@ type AdapterService interface {
 	DeleteTransactionByIDService(id int) error
 	GetAllUserTransactionService(id int) []model.Transaction
 	GetTransactionByCodeTransactionService(code_transaction string) (model.Transaction, error)
+
+	CreateVirtualAccountService(transaction model.Transaction) error
 }

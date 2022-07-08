@@ -41,6 +41,11 @@ func (s *svc) CreateTransactionService(transaction model.Transaction) error {
 		return err
 	}
 
+	err = s.CreateVirtualAccountService(res)
+	if err != nil {
+		return err
+	}
+
 	return nil
 }
 
