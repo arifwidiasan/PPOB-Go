@@ -57,3 +57,12 @@ func (r *repositoryMysqlLayer) DeleteUserByID(id int) error {
 
 	return nil
 }
+
+func (r *repositoryMysqlLayer) GetUserByUsername(username string) (user model.User, err error) {
+	res := r.DB.Where("username = ?", username).Find(&user)
+	if res.RowsAffected < 1 {
+		err = fmt.Errorf("user not found")
+	}
+
+	return
+}

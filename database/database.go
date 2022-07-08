@@ -34,6 +34,6 @@ func InitDB(conf config.Config) *gorm.DB {
 		})
 	}
 	DB.AutoMigrate(&model.Product_type{}, &model.Operator{}, &model.Product{}, &model.User{},
-		&model.Payment_method{})
+		&model.Payment_method{}, &model.Transaction{})
 	return DB
 }

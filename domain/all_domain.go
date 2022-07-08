@@ -33,12 +33,21 @@ type AdapterRepository interface {
 	UpdateUserByID(id int, user model.User) error
 	DeleteUserByID(id int) error
 	CheckLoginUser(input string) (user model.User, err error)
+	GetUserByUsername(username string) (user model.User, err error)
 
 	CreatePaymentMethod(payment_method model.Payment_method) error
 	GetAllPaymentMethod() []model.Payment_method
 	GetPaymentMethodByID(id int) (payment_method model.Payment_method, err error)
 	UpdatePaymentMethodByID(id int, payment_method model.Payment_method) error
 	DeletePaymentMethodByID(id int) error
+
+	CreateTransaction(transaction model.Transaction) error
+	GetTransactionByCodeTransaction(code_transaction string) (transaction model.Transaction, err error)
+	UpdateTransactionByID(id int, transaction model.Transaction) error
+	GetAllTransaction() []model.Transaction
+	GetTransactionByID(id int) (transaction model.Transaction, err error)
+	DeleteTransactionByID(id int) error
+	GetAllUserTransaction(id int) []model.Transaction
 }
 
 type AdapterService interface {
@@ -71,10 +80,19 @@ type AdapterService interface {
 	UpdateUserByIDService(id int, user model.User) error
 	DeleteUserByIDService(id int) error
 	LoginUser(input, password string) (string, int)
+	GetUserByUsernameService(username string) (model.User, error)
 
 	CreatePaymentMethodService(payment_method model.Payment_method) error
 	GetAllPaymentMethodService() []model.Payment_method
 	GetPaymentMethodByIDService(id int) (model.Payment_method, error)
 	UpdatePaymentMethodByIDService(id int, payment_method model.Payment_method) error
 	DeletePaymentMethodByIDService(id int) error
+
+	CreateTransactionService(transaction model.Transaction) error
+	GetAllTransactionService() []model.Transaction
+	GetTransactionByIDService(id int) (model.Transaction, error)
+	UpdateTransactionByIDService(id int, transaction model.Transaction) error
+	DeleteTransactionByIDService(id int) error
+	GetAllUserTransactionService(id int) []model.Transaction
+	GetTransactionByCodeTransactionService(code_transaction string) (model.Transaction, error)
 }
