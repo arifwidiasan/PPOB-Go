@@ -43,6 +43,7 @@ func (s *svc) CreateTransactionService(transaction model.Transaction) error {
 
 	err = s.CreateVirtualAccountService(res)
 	if err != nil {
+		_ = s.repo.DeleteTransactionByID(int(res.ID))
 		return err
 	}
 
