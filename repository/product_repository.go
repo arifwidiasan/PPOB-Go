@@ -58,3 +58,23 @@ func (r *repositoryMysqlLayer) DeleteProductByID(id int) error {
 
 	return nil
 }
+
+func (r *repositoryMysqlLayer) GetProductByProductType(product_type_id int) (products []model.Product, err error) {
+	res := r.DB.Model(&model.Product{}).Where("product_type_id = ?", product_type_id).
+		Scan(&products)
+	if res.RowsAffected < 1 {
+		err = fmt.Errorf("product not found")
+	}
+
+	return
+}
+
+func (r *repositoryMysqlLayer) GetProductByOperator(operator_id int) (products []model.Product, err error) {
+	res := r.DB.Model(&model.Product{}).Where("operator_id = ?", operator_id).
+		Scan(&products)
+	if res.RowsAffected < 1 {
+		err = fmt.Errorf("product not found")
+	}
+
+	return
+}

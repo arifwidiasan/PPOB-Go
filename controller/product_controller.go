@@ -119,3 +119,37 @@ func (ce *EchoController) DeleteProductController(c echo.Context) error {
 		"messages": "deleted",
 	})
 }
+
+func (ce *EchoController) GetProductByProductTypeController(c echo.Context) error {
+	product_type_id := c.Param("product_type_id")
+	id_int, _ := strconv.Atoi(product_type_id)
+	products, err := ce.Svc.GetProductByProductTypeService(id_int)
+
+	if err != nil {
+		return c.JSON(404, map[string]interface{}{
+			"messages": "product not found",
+		})
+	}
+
+	return c.JSON(200, map[string]interface{}{
+		"messages": "success",
+		"products": products,
+	})
+}
+
+func (ce *EchoController) GetProductByOperatorController(c echo.Context) error {
+	operator_id := c.Param("operator_id")
+	id_int, _ := strconv.Atoi(operator_id)
+	products, err := ce.Svc.GetProductByOperatorService(id_int)
+
+	if err != nil {
+		return c.JSON(404, map[string]interface{}{
+			"messages": "product not found",
+		})
+	}
+
+	return c.JSON(200, map[string]interface{}{
+		"messages": "success",
+		"products": products,
+	})
+}

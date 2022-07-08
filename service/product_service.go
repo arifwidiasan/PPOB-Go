@@ -47,3 +47,15 @@ func (s *svc) UpdateProductByIDService(id int, product model.Product) error {
 func (s *svc) DeleteProductByIDService(id int) error {
 	return s.repo.DeleteProductByID(id)
 }
+
+func (s *svc) GetProductByProductTypeService(product_type_id int) ([]model.Product, error) {
+	products, err := s.repo.GetProductByProductType(product_type_id)
+	return products, err
+
+}
+
+func (s *svc) GetProductByOperatorService(operator_id int) ([]model.Product, error) {
+	products, err := s.repo.GetProductByOperator(operator_id)
+	return products, err
+
+}
