@@ -54,6 +54,8 @@ type AdapterRepository interface {
 	CreateVirtualAccount(virtual_account model.Virtual_account) error
 	CheckVirtualAccount(user_id, payment_method_id int) (virtual_account model.Virtual_account, err error)
 	UpdateVirtualAccountByID(id int, virtual_account model.Virtual_account) error
+
+	CreateCallbackPayment(callback_payment model.Callback_payment) error
 }
 
 type AdapterService interface {
@@ -105,4 +107,6 @@ type AdapterService interface {
 	GetTransactionByCodeTransactionService(code_transaction string) (model.Transaction, error)
 
 	CreateVirtualAccountService(transaction model.Transaction) error
+
+	CreateCallbackPaymentService(callback_payment model.Callback_payment) error
 }
