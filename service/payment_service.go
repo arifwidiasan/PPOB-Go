@@ -16,17 +16,9 @@ func (s *svc) CreateCallbackPaymentService(callback_payment model.Callback_payme
 		return err
 	}
 
-	transaction, err := s.repo.GetTransactionByCodeTransaction(callback_payment.ExternalID)
-	if err != nil {
-		return err
-	}
-
+	transaction, _ := s.repo.GetTransactionByCodeTransaction(callback_payment.ExternalID)
 	transaction.Status = "success"
-
-	err = s.repo.UpdateTransactionByID(int(transaction.ID), transaction)
-	if err != nil {
-		return err
-	}
+	_ = s.repo.UpdateTransactionByID(int(transaction.ID), transaction)
 
 	return nil
 }
