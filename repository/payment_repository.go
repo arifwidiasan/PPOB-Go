@@ -14,3 +14,10 @@ func (r *repositoryMysqlLayer) CreateCallbackPayment(callback_payment model.Call
 
 	return nil
 }
+
+func (r *repositoryMysqlLayer) GetAllCallbackPayment() []model.Callback_payment {
+	callback_payment := []model.Callback_payment{}
+	r.DB.Find(&callback_payment)
+
+	return callback_payment
+}

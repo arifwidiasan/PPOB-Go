@@ -92,5 +92,6 @@ func RegisterGroupAPI(e *echo.Echo, conf config.Config) {
 
 	api.GET("/users/transactions/:code_transaction", cont.GetOneUserTransactionController, middleware.JWT([]byte(conf.JWT_KEY)))
 
+	api.GET("/xendith_callback_payments", cont.GetAllCallbackPaymentController)
 	api.POST("/xendith_callback_payments", cont.CreateCallbackPaymentController)
 }

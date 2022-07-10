@@ -12,3 +12,7 @@ func (s *svc) CreateCallbackPaymentService(callback_payment model.Callback_payme
 	}
 	return s.repo.CreateCallbackPayment(callback_payment)
 }
+
+func (s *svc) GetAllCallbackPaymentService() []model.Callback_payment {
+	return s.repo.GetAllCallbackPayment()
+}

@@ -21,7 +21,16 @@ func (ce *EchoController) CreateCallbackPaymentController(c echo.Context) error 
 	}
 
 	return c.JSON(201, map[string]interface{}{
-		"messages": "success",
-		"payment":  callback_payment.ExternalID,
+		"messages":         "success",
+		"callback_payment": callback_payment.ExternalID,
+	})
+}
+
+func (ce *EchoController) GetAllCallbackPaymentController(c echo.Context) error {
+	callback_payment := ce.Svc.GetAllCallbackPaymentService()
+
+	return c.JSON(200, map[string]interface{}{
+		"messages":         "success",
+		"callback_payment": callback_payment,
 	})
 }
