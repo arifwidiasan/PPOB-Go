@@ -30,6 +30,12 @@ func RegisterGroupAPI(e *echo.Echo, conf config.Config) {
 		})
 	})
 
+	e.POST("/health", func(c echo.Context) error {
+		return c.JSON(200, map[string]string{
+			"message": "your request awesome",
+		})
+	})
+
 	api := e.Group("/v1", middleware.CORS())
 
 	m.LogMiddleware(e)
@@ -85,4 +91,6 @@ func RegisterGroupAPI(e *echo.Echo, conf config.Config) {
 	api.POST("/users/transactions", cont.CreateTransactionController, middleware.JWT([]byte(conf.JWT_KEY)))
 
 	api.GET("/users/transactions/:code_transaction", cont.GetOneUserTransactionController, middleware.JWT([]byte(conf.JWT_KEY)))
+
+	api.POST("/xendith_callback_payments", cont.CreateCallbackPaymentController)
 }
