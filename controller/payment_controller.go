@@ -21,7 +21,7 @@ func (ce *EchoController) CreateCallbackPaymentController(c echo.Context) error 
 	}
 
 	return c.JSON(201, map[string]interface{}{
-		"messages":         "success",
+		"messages":         "success make payment",
 		"callback_payment": callback_payment.ExternalID,
 	})
 }
