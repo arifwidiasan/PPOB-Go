@@ -6,6 +6,4 @@ type Callback_payment struct {
 	ExternalID string `json:"external_id"`
 	PaymentID  string `json:"payment_id"`
 	VANumber   string `json:"account_number"`
-	Name       string `json:"name"`
-	Status     string `json:"status"`
 }
