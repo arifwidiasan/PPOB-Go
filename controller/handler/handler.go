@@ -36,7 +36,10 @@ func RegisterGroupAPI(e *echo.Echo, conf config.Config) {
 		})
 	})
 
-	api := e.Group("/v1", middleware.CORS())
+	api := e.Group("/v1", middleware.CORSWithConfig(middleware.CORSConfig{
+		AllowOrigins: []string{"http://localhost:3000"},
+		AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept},
+	}))
 
 	m.LogMiddleware(e)
 	api.POST("/admin/login", cont.LoginAdminController)
