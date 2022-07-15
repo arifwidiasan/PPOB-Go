@@ -34,3 +34,12 @@ func (r *repositoryMysqlLayer) UpdateVirtualAccountByID(id int, virtual_account 
 
 	return nil
 }
+
+func (r *repositoryMysqlLayer) GetVirtualAccountByExternalID(external_id string) (virtual_account model.Virtual_account, err error) {
+	res := r.DB.Where("external_id = ?", external_id).Preload(clause.Associations).Find(&virtual_account)
+	if res.RowsAffected < 1 {
+		err = fmt.Errorf("virtual_account not found")
+	}
+
+	return
+}
