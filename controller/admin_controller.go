@@ -13,7 +13,7 @@ import (
 // @Tags Admin
 // @Accept json
 // @Produce json
-// @Param	admin	body	model.AdminLogin	true	"JSON username and user_pass"
+// @Param	admin	body	docs.NewAdminLogin	true	"JSON username and user_pass"
 // @Success	200	{object} docs.LoginAdminSuccess
 // @Failure 401 {string} string "unauthorized"
 // @Failure 500 {string} string "internal server error"
@@ -21,7 +21,11 @@ import (
 func (ce *EchoController) LoginAdminController(c echo.Context) error {
 	adminLogin := model.AdminLogin{}
 
-	c.Bind(&adminLogin)
+	if err := c.Bind(&adminLogin); err != nil {
+		return c.JSON(400, map[string]interface{}{
+			"messages": err.Error(),
+		})
+	}
 
 	token, statusCode := ce.Svc.LoginAdmin(adminLogin.Username, adminLogin.Password)
 	switch statusCode {

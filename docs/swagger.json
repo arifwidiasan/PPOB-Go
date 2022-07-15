@@ -4,7 +4,7 @@
     ],
     "swagger": "2.0",
     "info": {
-        "description": "Documentation of To-do List App API.",
+        "description": "Documentation of UPay API.",
         "title": "UPay API",
         "termsOfService": "http://swagger.io/terms/",
         "contact": {
@@ -41,7 +41,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/model.AdminLogin"
+                            "$ref": "#/definitions/docs.NewAdminLogin"
                         }
                     }
                 ],
@@ -66,9 +66,80 @@
                     }
                 }
             }
+        },
+        "/product_types": {
+            "post": {
+                "description": "create new product type with name.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Product Type"
+                ],
+                "summary": "Create New Product Type.",
+                "parameters": [
+                    {
+                        "description": "JSON name",
+                        "name": "product_type",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/docs.CreateProductType"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/docs.CreateProductTypeSuccess"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/docs.CreateProductTypeFail"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
+        "docs.CreateProductType": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "example": "Pulsa"
+                }
+            }
+        },
+        "docs.CreateProductTypeFail": {
+            "type": "object",
+            "properties": {
+                "messages": {
+                    "type": "string",
+                    "example": "error insert product type"
+                }
+            }
+        },
+        "docs.CreateProductTypeSuccess": {
+            "type": "object",
+            "properties": {
+                "messages": {
+                    "type": "string",
+                    "example": "success"
+                },
+                "product_type_name": {
+                    "type": "string",
+                    "example": "Pulsa"
+                }
+            }
+        },
         "docs.LoginAdminSuccess": {
             "type": "object",
             "properties": {
@@ -82,16 +153,16 @@
                 }
             }
         },
-        "model.AdminLogin": {
+        "docs.NewAdminLogin": {
             "type": "object",
             "properties": {
                 "password": {
                     "type": "string",
-                    "example": "admin123"
+                    "example": "admin"
                 },
                 "username": {
                     "type": "string",
-                    "example": "admin"
+                    "example": "admin123"
                 }
             }
         }

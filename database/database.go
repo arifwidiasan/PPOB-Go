@@ -33,5 +33,7 @@ func InitDB(conf config.Config) *gorm.DB {
 			{"username": "admin", "password": "admin123", "created_at": time.Now()},
 		})
 	}
+	DB.AutoMigrate(&model.Product_type{}, &model.Operator{}, &model.Product{}, &model.User{},
+		&model.Payment_method{}, &model.Transaction{}, &model.Virtual_account{}, &model.Callback_payment{})
 	return DB
 }
