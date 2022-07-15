@@ -47,6 +47,9 @@ func (s *svc) CreateTransactionService(transaction model.Transaction) error {
 		return err
 	}
 
+	virtual_account, _ := s.repo.GetVirtualAccountByExternalID(res.CodeTransaction)
+	_ = s.SendEmailService(res.User.Email, res, virtual_account)
+
 	return nil
 }
 
