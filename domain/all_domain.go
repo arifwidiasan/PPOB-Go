@@ -109,6 +109,7 @@ type AdapterService interface {
 	GetTransactionByCodeTransactionService(code_transaction string) (model.Transaction, error)
 
 	CreateVirtualAccountService(transaction model.Transaction) error
+	GetVirtualAccountService(external_id string) (model.Virtual_account, error)
 
 	CreateCallbackPaymentService(callback_payment model.Callback_payment) error
 	GetAllCallbackPaymentService() []model.Callback_payment

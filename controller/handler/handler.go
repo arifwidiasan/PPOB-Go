@@ -94,4 +94,8 @@ func RegisterGroupAPI(e *echo.Echo, conf config.Config) {
 
 	api.GET("/xendith_callback_payments", cont.GetAllCallbackPaymentController)
 	api.POST("/xendith_callback_payments", cont.CreateCallbackPaymentController)
+
+	api.GET("/payments/:code_transaction/:price", cont.SimulatePaymentController)
+
+	api.GET("/transactions/:id/emails", cont.SendEmailController)
 }

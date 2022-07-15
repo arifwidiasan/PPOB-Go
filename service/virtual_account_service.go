@@ -49,3 +49,7 @@ func (s *svc) CreateVirtualAccountService(transaction model.Transaction) error {
 
 	return nil
 }
+
+func (s *svc) GetVirtualAccountService(external_id string) (model.Virtual_account, error) {
+	return s.repo.GetVirtualAccountByExternalID(external_id)
+}
