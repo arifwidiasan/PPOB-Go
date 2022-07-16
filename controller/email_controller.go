@@ -31,7 +31,7 @@ func (ce *EchoController) SendEmailController(c echo.Context) error {
 		})
 	}
 
-	return c.JSON(201, map[string]interface{}{
+	return c.JSON(200, map[string]interface{}{
 		"messages":         "success",
 		"transaction_code": transaction.CodeTransaction,
 	})
