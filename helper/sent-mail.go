@@ -12,6 +12,8 @@ func SendEmail(email string, transaction model.Transaction, virtual_account mode
 	ac := accounting.Accounting{Symbol: "Rp. ", Precision: 2, Thousand: ".", Decimal: ","}
 	price := ac.FormatMoney(transaction.Price)
 
+	link_payment := fmt.Sprintf("%s%s%s%d", "https://upay.exzork.me/v1/payments/", transaction.CodeTransaction, "/", transaction.Price)
+
 	server := "smtp-mail.outlook.com"
 	port := 587
 	user := "upay-app@outlook.com"
@@ -33,6 +35,7 @@ func SendEmail(email string, transaction model.Transaction, virtual_account mode
 		"Harga\t\t\t: " + price + "\n" +
 		"Pembayaran \t  : Virtual Account - " + transaction.Payment_Method.CodeBank + "\n\n" +
 		"Dimohon untuk segera melakukan pembarayan ke nomor berikut : \n\n" + virtual_account.VANumber + "\n\n" +
+		"Atau bisa juga dengan klik tautan berikut untuk melakukan pembayaran : \n\n" + link_payment + "\n\n" +
 		"Terima kasih telah melakukan transaksi di Upay !")
 
 	endpoint := fmt.Sprintf("%v:%v", server, port)
