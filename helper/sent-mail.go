@@ -16,7 +16,7 @@ func SendEmail(email string, transaction model.Transaction, virtual_account mode
 
 	server := "smtp-mail.outlook.com"
 	port := 587
-	user := "upay-app@outlook.com"
+	user := "upay-app-cs@outlook.com"
 	from := user
 	pass := "budipekerti123"
 	dest := email
