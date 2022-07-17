@@ -99,9 +99,9 @@ func RegisterGroupAPI(e *echo.Echo, conf config.Config) {
 
 	api.GET("/transactions/:id/emails", cont.SendEmailController)
 
-	api.GET("/dashboard/transactions", cont.GetCountTransactionController)
-	api.GET("/dashboard/transactions_success", cont.GetCountTransactionSuccessController)
-	api.GET("/dashboard/products", cont.GetCountProductController)
-	api.GET("/dashboard/users", cont.GetCountUserController)
+	api.GET("/dashboard/transaction", cont.GetCountTransactionController)
+	api.GET("/dashboard/transaction_success", cont.GetCountTransactionSuccessController)
+	api.GET("/dashboard/product", cont.GetCountProductController)
+	api.GET("/dashboard/user", cont.GetCountUserController)
 
 }
