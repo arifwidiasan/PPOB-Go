@@ -58,6 +58,11 @@ type AdapterRepository interface {
 
 	CreateCallbackPayment(callback_payment model.Callback_payment) error
 	GetAllCallbackPayment() []model.Callback_payment
+
+	GetCountTransaction() (count int64, err error)
+	GetCountTransactionSuccess() (count int64, err error)
+	GetCountProduct() (count int64, err error)
+	GetCountUser() (count int64, err error)
 }
 
 type AdapterService interface {
@@ -117,4 +122,9 @@ type AdapterService interface {
 	SendEmailService(email string, transaction model.Transaction, virtual_account model.Virtual_account) error
 
 	SimulatePaymentService(code_transaction string, price int) error
+
+	GetCountTransactionService() (int64, error)
+	GetCountTransactionSuccessService() (int64, error)
+	GetCountProductService() (int64, error)
+	GetCountUserService() (int64, error)
 }

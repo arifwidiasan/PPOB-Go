@@ -98,4 +98,10 @@ func RegisterGroupAPI(e *echo.Echo, conf config.Config) {
 	api.GET("/payments/:code_transaction/:price", cont.SimulatePaymentController)
 
 	api.GET("/transactions/:id/emails", cont.SendEmailController)
+
+	api.GET("/dashboard/transactions", cont.GetCountTransactionController)
+	api.GET("/dashboard/transactions_success", cont.GetCountTransactionSuccessController)
+	api.GET("/dashboard/products", cont.GetCountProductController)
+	api.GET("/dashboard/users", cont.GetCountUserController)
+
 }
