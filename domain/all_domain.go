@@ -115,4 +115,6 @@ type AdapterService interface {
 	GetAllCallbackPaymentService() []model.Callback_payment
 
 	SendEmailService(email string, transaction model.Transaction, virtual_account model.Virtual_account) error
+
+	SimulatePaymentService(code_transaction string, price int) error
 }
